@@ -10,8 +10,11 @@ class MoviesController < ApplicationController
   
   def find_by_director
     @movie = Movie.find(params[:id])
-    @director = @movie.director
-    @movies = Movie.where(director: @director)
+    @movie_director = @movie.director
+    if @movie_director.nil? || @movie_director == ''
+      redirect_to root_url, notice: '\'' + @movie.title + "\' has no director info"
+    end
+    @movies = Movie.where(director: @movie_director)
   end
 
   def show

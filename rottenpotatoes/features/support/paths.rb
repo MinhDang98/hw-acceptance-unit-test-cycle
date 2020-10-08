@@ -26,11 +26,11 @@ module NavigationHelpers
       
     when /^the details page for "(.+)"$/
       selected_movie_id = Movie.find_by(title: $1).id
-      movie_path(Movie.find_by(selected_movie_id))
+      movie_path(selected_movie_id)
       
     when /^the Similar Movies page for "(.+)"/
       selected_movie_id = Movie.find_by(title: $1).id
-      search_similar_movies_path(selected_movie_id)
+      find_by_director_movie_path(selected_movie_id)
 
     else
       begin
