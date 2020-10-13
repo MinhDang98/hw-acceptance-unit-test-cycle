@@ -9,11 +9,14 @@ class MoviesController < ApplicationController
   end
   
   def find_by_director
+    @similar_movies = Movie.find_similar_movies(params[:id])
+    if @similar_movies.nil?
+      @movie_id = Movie.find(params[:id])
+      @movie_title = @movie_id.title
+      redirect_to root_url, notice: "'#{@movie_title}' has no director info"
+    end
     @movie = Movie.find(params[:id])
     @movie_director = @movie.director
-    if @movie_director.nil? || @movie_director == ''
-      redirect_to root_url, notice: '\'' + @movie.title + "\' has no director info"
-    end
     @movies = Movie.where(director: @movie_director)
   end
 
