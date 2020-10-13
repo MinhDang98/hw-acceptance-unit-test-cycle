@@ -30,7 +30,7 @@ module NavigationHelpers
       
     when /^the Similar Movies page for "(.+)"/
       selected_movie_id = Movie.find_by(title: $1).id
-      find_by_director_movie_path(selected_movie_id)
+      find_by_director_path(selected_movie_id)
 
     else
       begin
