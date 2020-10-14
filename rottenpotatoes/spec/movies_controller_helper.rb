@@ -25,4 +25,21 @@ RSpec.describe MoviesController, :type => :controller do
       expect(response).to redirect_to(root_url)
     end
   end
+  
+  describe 'Call index' do
+    it 'should highlight title_header' do
+      get :index, {sort: 'title'}
+      expect(assigns(:title_header)).to eql('bg-warning hilite')
+    end
+
+    it 'should highlight release_date header' do
+      get :index, {sort: 'release_date'}
+      expect(assigns(:date_header)).to eql('bg-warning hilite')
+    end
+    
+    it 'should render the index template' do
+      get :index
+      expect(response).to render_template('index')
+    end
+  end
 end
